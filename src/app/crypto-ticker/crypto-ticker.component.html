@@ -1,0 +1,35 @@
+<section class="crypto-ticker__container">
+  <form class="crypto-ticker__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Select currency</mat-label>
+      <mat-select formControlName="currencyOne">
+        <mat-option
+          *ngFor="let currency of currencies$ | async"
+          value="{{ currency }}"
+        >
+          {{ currency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select currency</mat-label>
+      <mat-select formControlName="currencyTwo">
+        <mat-option
+          *ngFor="let currency of currencies$ | async"
+          value="{{ currency }}"
+        >
+          {{ currency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+
+  <div class="crypto-ticker__content">
+    <mat-card>Hello</mat-card>
+  </div>
+
+  {{ form.value | json }}
+</section>
