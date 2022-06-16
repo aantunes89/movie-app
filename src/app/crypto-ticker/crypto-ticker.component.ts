@@ -18,9 +18,13 @@ export class CryptoTickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(CryptoTickerActions.fetchCurrencies());
-    this.currencies$ = this.store.pipe(select(selectCurrencies));
 
     this.initializeForm();
+    this.initializeCurrencyValues();
+  }
+
+  initializeCurrencyValues() {
+    this.currencies$ = this.store.pipe(select(selectCurrencies));
   }
 
   initializeForm(): void {

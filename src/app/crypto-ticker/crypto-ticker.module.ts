@@ -6,10 +6,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/crypto-ticker.reducer';
 import { CryptoTickerEffects } from './store/crypto-ticker.effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ApiErrorsInterceptor } from '../core/middlewares/api-errors.interceptor.service';
 
 const routes: Routes = [{ path: '', component: CryptoTickerComponent }];
 
@@ -24,7 +25,14 @@ const routes: Routes = [{ path: '', component: CryptoTickerComponent }];
     SharedModule,
     RouterModule.forChild(routes),
   ],
-  providers: [CryptoTickerService],
+  providers: [
+    CryptoTickerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiErrorsInterceptor,
+      multi: true,
+    },
+  ],
   exports: [CryptoTickerComponent],
 })
 export class CryptoTickerModule {}

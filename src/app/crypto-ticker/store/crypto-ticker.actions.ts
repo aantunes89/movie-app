@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CryptoResponseInterface } from 'src/app/crypto-ticker/types/crypto-response.interface';
+import { CryptoPairResponseInterface } from '../types/crypto-pair-response.interface';
 
 export const fetchCurrencies = createAction(
   '[FETCH CURRENCIES] FETCH ALL CURRENCIES'
@@ -17,5 +17,5 @@ export const fetchCurrencyPair = createAction(
 
 export const updateCurrencyPair = createAction(
   '[UPDATE CURRENCY PAIR] UPDATE CURRENCY PAIR',
-  props<{ currencyOne: string; currencyTwo: string }>()
+  props<{ cryptoPairDetails: CryptoPairResponseInterface }>()
 );
